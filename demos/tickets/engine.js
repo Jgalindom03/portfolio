@@ -65,7 +65,7 @@
     }
   ];
 
-  var PASSWORD_SOLUTION = 'Hola, puedes recuperar el acceso desde «He olvidado mi contraseña» en la pantalla de inicio de sesión. Introduce el correo asociado a tu cuenta y sigue el enlace que recibirás. Revisa la carpeta de spam si no aparece. Si el correo no llega, contacta con soporte para verificar la cuenta; no compartas tu contraseña.';
+  var ACCOUNT_RECOVERY_REPLY = 'Hola, puedes recuperar el acceso desde «He olvidado mi contraseña» en la pantalla de inicio de sesión. Introduce el correo asociado a tu cuenta y sigue el enlace que recibirás. Revisa la carpeta de spam si no aparece. Si el correo no llega, contacta con soporte para verificar la cuenta; no compartas tu contraseña.';
 
   var FIXTURES = {
     tickets: [
@@ -100,7 +100,7 @@
       {
         id: 'HIS-021', subject: 'Recuperar contraseña y acceso a la cuenta',
         body: 'He olvidado la contraseña y no puedo acceder a mi cuenta. Necesito recuperar el acceso al panel.',
-        solution: PASSWORD_SOLUTION, validated: true,
+        solution: ACCOUNT_RECOVERY_REPLY, validated: true,
         keywords: ['contrasena', 'recuperar', 'cuenta', 'acceso']
       },
       {
@@ -254,7 +254,7 @@
       result.sources = [source(password ? 'DOC-04' : 'DOC-03')];
       result.steps.push(step('rag', 'Respuesta basada en la documentación', 'Se recupera el procedimiento correspondiente y se prepara un borrador con su referencia verificable.', 'done', [evidence('Documento', result.sources[0].id), evidence('Título', result.sources[0].title), evidence('Origen', result.sources[0].source)]));
       result.steps.push(step('api', 'Consulta API omitida', 'Esta consulta solicita instrucciones de uso; no necesita consultar datos de un vehículo.', 'skipped'));
-      result.response = password ? PASSWORD_SOLUTION + ' [DOC-04]' : 'Hola, para configurar una geocerca en el panel de demostración:\n\n1. Abre Geocercas > Nueva geocerca.\n2. Dibuja el perímetro del almacén, asigna un nombre y guarda.\n3. Asocia los vehículos que deseas supervisar.\n4. Activa los eventos de entrada, salida o ambos y elige el canal de aviso.\n5. Comprueba la configuración con un recorrido de prueba.\n\nEstos pasos proceden del manual de usuario demo. No se ha creado ni modificado ninguna geocerca. [DOC-03]';
+      result.response = password ? ACCOUNT_RECOVERY_REPLY + ' [DOC-04]' : 'Hola, para configurar una geocerca en el panel de demostración:\n\n1. Abre Geocercas > Nueva geocerca.\n2. Dibuja el perímetro del almacén, asigna un nombre y guarda.\n3. Asocia los vehículos que deseas supervisar.\n4. Activa los eventos de entrada, salida o ambos y elige el canal de aviso.\n5. Comprueba la configuración con un recorrido de prueba.\n\nEstos pasos proceden del manual de usuario demo. No se ha creado ni modificado ninguna geocerca. [DOC-03]';
       result.summary = 'Guía preparada con una fuente documental. No requiere consultas API.';
     } else if (route === 'api_failure') {
       result.sources = [source('DOC-02'), source('DOC-05')];
