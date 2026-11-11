@@ -1,0 +1,14 @@
+{
+  "pdfjs-dist": {
+    "version": "6.5.438",
+    "source": "https://registry.npmjs.org/pdfjs-dist",
+    "purpose": "Local PDF text extraction",
+    "license": "Apache-2.0; see PDFJS-LICENSE.txt"
+  },
+  "mammoth": {
+    "version": "1.13.0",
+    "source": "https://registry.npmjs.org/mammoth",
+    "purpose": "Local DOCX text extraction",
+    "license": "BSD-2-Clause; see MAMMOTH-LICENSE.txt"
+  }
+}

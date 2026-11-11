@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#122d32">
+  <meta name="description" content="Demo interactiva de atención al cliente con tres agentes: historial, conocimiento y diagnóstico de vehículos.">
+  <title>Support Studio · Centro de agentes</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231b806c'/%3E%3Cpath d='M11 12v16h18M19 12v9h10' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="engine.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <a href="#inbox" class="brand" aria-label="Support Studio inicio"><span class="brand-symbol">E<span>↗</span></span><span>Support Studio<span class="brand-dot">.</span></span></a>
+      <div class="workspace-label">WORKSPACE <span>DEMO</span></div>
+      <nav>
+        <button class="nav-item active" data-view="inbox"><span data-icon="inbox"></span>Bandeja inteligente<span class="nav-count" id="nav-count">5</span></button>
+        <button class="nav-item" data-view="knowledge"><span data-icon="book"></span>Conocimiento</button>
+        <button class="nav-item" data-view="activity"><span data-icon="activity"></span>Actividad</button>
+      </nav>
+      <div class="sidebar-section">TU EQUIPO DE AGENTES</div>
+      <div class="team-item"><span class="team-dot db"></span>Memoria <span>DB</span></div>
+      <div class="team-item"><span class="team-dot rag"></span>Conocimiento <span>RAG</span></div>
+      <div class="team-item"><span class="team-dot api"></span>Diagnóstico <span>API</span></div>
+      <div class="sidebar-bottom">
+        <div class="sandbox-card"><span data-icon="shield"></span><strong>Un espacio para probar</strong><p>Datos ficticios. Integraciones simuladas. Todo en tu equipo.</p><span class="offline-status"><i></i> Funciona sin conexión</span></div>
+        <div class="sidebar-user"><span class="user-avatar">LL</span><div>Equipo de soporte<small>Entorno de demostración</small></div></div>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar"><div class="breadcrumb">Support Studio <span>/</span> <strong id="breadcrumb-view">Centro de agentes</strong></div><div class="topbar-actions"><span class="demo-tag"><span></span> DEMO INTERACTIVA</span><button class="button ghost compact" id="guide-btn"><span data-icon="play"></span>Guía de presentación</button></div></header>
+      <main>
+        <nav class="mobile-nav" aria-label="Secciones"><button class="active" data-view="inbox"><span data-icon="inbox"></span>Bandeja</button><button data-view="knowledge"><span data-icon="book"></span>Conocimiento</button><button data-view="activity"><span data-icon="activity"></span>Actividad</button></nav>
+        <section class="page-heading"><div><div class="eyebrow">ATENCIÓN AL CLIENTE, CONECTADA</div><h1 id="page-title">Del correo a la solución<span>.</span></h1><p id="page-subtitle">Tres agentes especializados. Una respuesta con contexto. Tú tienes la última palabra.</p></div><button class="button secondary" id="reset-btn"><span data-icon="reset"></span>Reiniciar demo</button></section>
+        <section class="metrics" aria-label="Resumen de esta sesión" id="metrics"></section>
+        <div id="inbox-view" class="view">
+          <div class="demo-intro"><span class="intro-icon" data-icon="spark"></span><p><strong>Mira cómo trabajan juntos.</strong> Elige un correo y pulsa «Resolver con agentes» para seguir el recorrido.</p><span class="intro-label">SIMULACIÓN LOCAL</span></div>
+          <div class="desk-layout">
+            <section class="inbox-panel panel" aria-label="Correos de ejemplo"><div class="panel-heading"><div><h2>Bandeja de entrada</h2><span class="subtle" id="inbox-summary">Casos listos para explorar</span></div><button class="icon-button" id="new-ticket-btn" title="Crear correo de prueba" aria-label="Crear correo de prueba"><span data-icon="plus"></span></button></div><label class="search-box"><span data-icon="search"></span><input id="ticket-search" type="search" placeholder="Buscar un correo…" aria-label="Buscar un correo"></label><div id="ticket-list" class="ticket-list"></div><div class="inbox-footer"><span data-icon="mail"></span>Correo y CRM simulados</div></section>
+            <div class="case-workspace">
+              <section class="email-panel panel" id="email-panel" aria-label="Correo seleccionado"></section>
+              <section class="agents-panel panel" aria-label="Ejecución de los tres agentes"><div class="panel-heading agents-heading"><div><span class="section-kicker">ORQUESTACIÓN EN DIRECTO</span><h2>El equipo que resuelve</h2></div><div class="execution-controls"><label class="speed-control" for="speed-select">Ritmo <select id="speed-select"><option value="1800">Normal</option><option value="650">Rápido</option><option value="3200">Presentación</option></select></label><button class="icon-button" id="step-btn" title="Avanzar un paso" aria-label="Avanzar un paso"><span data-icon="step"></span></button><button class="button primary" id="run-btn"><span data-icon="play"></span>Resolver con agentes</button></div></div><div class="agent-flow" id="agent-flow"></div><div id="execution-status" class="execution-status" role="status" aria-live="polite"></div><details class="trace-details" id="trace-details"><summary><span data-icon="activity"></span>Ver trazabilidad paso a paso<span id="trace-count">0 pasos</span></summary><ol class="trace-list" id="trace-list"></ol></details></section>
+              <div class="results-grid"><section class="response-panel panel" aria-label="Respuesta propuesta" id="response-panel"></section><section class="evidence-panel panel" aria-label="Evidencias consultadas"><div class="panel-heading"><div><span class="section-kicker">POR QUÉ ESTA RESPUESTA</span><h2>Evidencias</h2></div><span class="evidence-count" id="evidence-count">0</span></div><div class="evidence-tabs" role="tablist" aria-label="Tipos de evidencia"><button role="tab" aria-selected="true" data-evidence="sources" id="tab-sources" aria-controls="evidence-content">Documentos</button><button role="tab" aria-selected="false" data-evidence="api" id="tab-api" aria-controls="evidence-content">API</button><button role="tab" aria-selected="false" data-evidence="history" id="tab-history" aria-controls="evidence-content">Historial</button></div><div id="evidence-content" role="tabpanel" aria-labelledby="tab-sources"></div></section></div>
+            </div>
+          </div>
+        </div>
+        <section id="knowledge-view" class="view" hidden></section>
+        <section id="activity-view" class="view" hidden></section>
+        <footer class="page-footer"><span>Support Studio · Agent workspace</span><span>POC · Respuestas e integraciones simuladas · Sin envíos reales</span><button id="export-btn">Exportar sesión <span data-icon="download"></span></button></footer>
+      </main>
+    </div>
+  </div>
+  <dialog id="guide-dialog" class="modal guide-modal" aria-labelledby="guide-title"><form method="dialog"><button class="modal-close icon-button" aria-label="Cerrar guía">×</button></form><span class="section-kicker">TU DEMO EN 3 MINUTOS</span><h2 id="guide-title">Una historia fácil de enseñar.</h2><p class="modal-intro">Un correo entra. Los agentes buscan contexto. Una persona valida la respuesta y el sistema la recuerda.</p><ol class="guide-steps"><li><span>01</span><div><strong>Empieza por las alertas del vehículo</strong><p>Resuelve el primer correo. DB busca precedentes, RAG consulta la guía y API descubre la configuración. Abre las evidencias de cada agente.</p></div></li><li><span>02</span><div><strong>Revisa, corrige y valida</strong><p>Edita el borrador si quieres y pulsa «Validar y guardar». Verás la actualización del CRM simulado y la nueva memoria validada.</p></div></li><li><span>03</span><div><strong>Haz visible el aprendizaje</strong><p>Pulsa «Repetir caso». DB recuperará la solución aprobada y los otros agentes no necesitarán intervenir.</p></div></li><li><span>04</span><div><strong>Enseña también los límites</strong><p>Prueba la consulta documental, el servicio no disponible o un correo propio. Si falta información, el caso se deriva a una persona.</p></div></li></ol><div class="guide-note">Este recorrido conjunto es una propuesta de POC. El proyecto original utiliza DB y RAG en el gestor de tickets y ofrece API como asistente separado.</div><button class="button primary full-width" id="start-guide-btn">Vamos a la demo <span data-icon="arrow"></span></button></dialog>
+  <dialog id="new-dialog" class="modal" aria-labelledby="new-title"><form id="new-ticket-form"><button type="button" class="modal-close icon-button" data-close="new-dialog" aria-label="Cerrar">×</button><span class="section-kicker">PRUEBA TU PROPIO CASO</span><h2 id="new-title">Nuevo correo de prueba</h2><p class="modal-intro">Prueba recuperar una contraseña, crear una geocerca o revisar alertas de velocidad del vehículo <strong>LL-204</strong>. Para simular un fallo de API, usa <strong>LL-305</strong> y «servicio no disponible». Otras consultas se derivan a revisión humana.</p><label class="field">Asunto<input name="subject" required maxlength="140" placeholder="No recibo alertas del vehículo LL-204"></label><label class="field">Mensaje<textarea name="body" required minlength="10" maxlength="4000" rows="5" placeholder="Describe lo que le ocurre al cliente…"></textarea></label><button type="submit" class="button primary full-width">Añadir a la bandeja <span data-icon="arrow"></span></button></form></dialog>
+  <dialog id="reset-dialog" class="modal small-modal" aria-labelledby="reset-title"><span class="section-kicker">VOLVER AL PUNTO DE PARTIDA</span><h2 id="reset-title">¿Reiniciar la demo?</h2><p>Se eliminarán los correos de prueba, las respuestas validadas y la actividad de esta demo en este navegador.</p><div class="dialog-actions"><button class="button secondary" data-close="reset-dialog">Cancelar</button><button class="button primary" id="confirm-reset-btn">Reiniciar demo</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>Esta demo necesita JavaScript. Actívalo en tu navegador para visualizar los agentes.</noscript>
+</body>
+</html>

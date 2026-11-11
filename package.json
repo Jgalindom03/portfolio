@@ -1,0 +1,13 @@
+{
+  "name": "javier-galindo-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio profesional y demos locales de Javier Galindo",
+  "author": {
+    "name": "Jgalindom03",
+    "email": "jgalindom2003@gmail.com"
+  },
+  "scripts": {
+    "test": "node --test tests/poc-behavior.test.cjs"
+  }
+}
