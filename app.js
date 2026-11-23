@@ -247,7 +247,7 @@
     ${renderCertificates(data)}
     ${renderToolkit(data)}
     ${renderEducation(data)}
-    <section class="contact-section" id="contact" aria-labelledby="contact-title"><div><p class="section-eyebrow">${escapeHtml(data.contactEyebrow)}</p><h2 id="contact-title">${escapeHtml(data.contactTitle)}</h2><p>${escapeHtml(data.contactCopy)}</p></div><div class="contact-links"><a href="mailto:jgalindom2003@gmail.com" class="contact-link">${escapeHtml(data.emailLabel)}${icon("arrow")}</a><a href="https://www.linkedin.com/in/javiergalindomartinez" target="_blank" rel="noopener noreferrer" class="contact-link">${escapeHtml(data.linkedinLabel)}${icon("external")}</a></div><p class="confidentiality-note">${escapeHtml(data.confidentiality)}</p></section>`;
+    <section class="contact-section" id="contact" aria-labelledby="contact-title"><div><p class="section-eyebrow">${escapeHtml(data.contactEyebrow)}</p><h2 id="contact-title">${escapeHtml(data.contactTitle)}</h2><p>${escapeHtml(data.contactCopy)}</p></div><div class="contact-links"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=jgalindom2003%40gmail.com" target="_blank" rel="noopener noreferrer" class="contact-link">${escapeHtml(data.emailLabel)}${icon("arrow")}</a><a href="https://www.linkedin.com/in/javiergalindomartinez" target="_blank" rel="noopener noreferrer" class="contact-link">${escapeHtml(data.linkedinLabel)}${icon("external")}</a></div><p class="confidentiality-note">${escapeHtml(data.confidentiality)}</p></section>`;
     document.querySelector("[data-footer-note]").textContent = data.footer;
     applyFilter();
   }
